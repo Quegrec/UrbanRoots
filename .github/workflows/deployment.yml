@@ -1,0 +1,30 @@
+on:
+    push:
+        tags:
+            - "*"
+
+jobs:
+    deployment:
+        name: Deploy to production
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Login to DockerHub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Build and push Docker images
+              working-directory: ./production
+              run: |
+                  docker-compose build
+                  docker-compose push
+
+            - name: Deploy to production
+              working-directory: ./production
+              run: |
+                  docker-compose -f production/docker-compose.yml up -d

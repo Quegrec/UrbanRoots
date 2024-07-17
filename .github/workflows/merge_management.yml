@@ -1,0 +1,16 @@
+name: Delete Merged Branch
+
+on:
+    pull_request:
+        types: [closed]
+        branches: [trunk]
+
+jobs:
+    delete_branch:
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.merged == true
+        steps:
+            - name: Delete Branch
+              run: |
+                  git fetch --prune
+                  git push origin --delete ${{ github.event.pull_request.head.ref }}
