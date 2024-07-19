@@ -43,9 +43,7 @@ class InMemoryProfileRepository implements ProfileRepositoryInterface
     public function findById(string $id): ?Profile
     {
         foreach ($this->profiles as $profile) {
-            dump('ici');
             if ($profile->getId() === $id) {
-                dump('la');
                 return $profile;
             }
         }

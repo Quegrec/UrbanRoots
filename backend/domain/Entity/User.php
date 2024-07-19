@@ -7,6 +7,7 @@ class User
     private string $id;
     private \DateTimeInterface $createdAt;
     private ?\DateTimeInterface $updatedAt = null;
+    private ?\DateTimeInterface $lastConnection = null;
     private array $ratings = [];
 
     public function __construct(
@@ -109,5 +110,17 @@ class User
     public function getRatings(): array
     {
         return $this->ratings;
+    }
+
+        public function getLastConnection(): ?\DateTimeInterface
+    {
+        return $this->lastConnection;
+    }
+
+    public function login(): self
+    {
+        $this->lastConnection = new \DateTime();
+
+        return $this;
     }
 }
