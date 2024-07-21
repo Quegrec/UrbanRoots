@@ -53,7 +53,9 @@ class RegisterUser extends UseCase
 
         try {
             $this->userRepository->create($user);
-            $this->profileRepository->create($profile);
+            if ($request->getRole() !== ['ROLE_ADMIN']) {
+                $this->profileRepository->create($profile);
+            }
         } catch (\Exception $e) {
             return new RegisterUserResponse(success: false, errors: [ErrorStatus::INTERNAL_ERROR => $e->getMessage()]);
         }
