@@ -1,16 +1,16 @@
 <?php
 
-namespace Domain\Response\User;
+namespace Domain\Response\Module;
 
-use Domain\Entity\User;
+use Domain\Entity\Module;
 use Domain\Response\DomainResponseInterface;
 
-class RegisterUserResponse implements DomainResponseInterface
+class CreateModuleResponse implements DomainResponseInterface
 {
     public function __construct(
         private bool $success,
         private array $errors = [],
-        private ?User $user = null
+        private ?Module $module = null
     ) {
     }
 
@@ -24,8 +24,8 @@ class RegisterUserResponse implements DomainResponseInterface
         return $this->errors;
     }
 
-    public function getUser(): ?User
+    public function getModule(): ?Module
     {
-        return $this->user;
+        return $this->module;
     }
 }
