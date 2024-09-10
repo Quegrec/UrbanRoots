@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'homepage')]
+    #[Route('/', name: 'app_home')]
     public function index(): Response
     {
         return $this->render('homepage.html.twig', [
