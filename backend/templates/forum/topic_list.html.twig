@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% block body %}
+<div class="max-w-4xl mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-6">Forum Topics</h1>
+    <ul class="space-y-4">
+        {% for topic in topics %}
+            <li class="p-4 bg-gray-100 rounded-lg shadow">
+                <a href="" class="text-lg font-semibold text-blue-600">{{ topic.title }}</a> 
+                {# href="{{ path('forum_topic', { 'id': topic.id }) }}" #}
+                <p class="text-sm text-gray-600">{{ topic.description }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

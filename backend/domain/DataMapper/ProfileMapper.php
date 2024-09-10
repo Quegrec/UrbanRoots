@@ -12,11 +12,10 @@ class ProfileMapper implements DataMapperInterface
 
         $infraEntity
             ->setId($entity->getId())
-            ->setOwner($entity->getUser())
             ->setBio($entity->getBio());
 
-        if ($entity->getOwner() !== null) {
-            $infraEntity->setOwner(UserMapper::toSymfonyEntity($entity->getOwner()));
+        if ($entity->getUser() !== null) {
+            $infraEntity->setOwner(UserMapper::toSymfonyEntity($entity->getUser()));
         }
 
         return $infraEntity;
@@ -25,7 +24,7 @@ class ProfileMapper implements DataMapperInterface
     public static function toDomainEntity($entity)
     {
         $infraEntity = (new \Domain\Entity\Profile(
-            user: $entity->getUser(),
+            user: UserMapper::toDomainEntity($entity->getUser()),
         ))->setId($entity->getId())
             ->setBio($entity->getBio())
             ->setAvatarUrl($entity->getAvatarUrl())

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ topic.title }}{% endblock %}
+
+{% block body %}
+<div class="max-w-4xl mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">{{ topic.title }}</h1>
+    <p class="mb-4 text-gray-700">{{ topic.description }}</p>
+
+    <div class="space-y-6">
+        {% for post in topic.posts %}
+            <div class="p-4 bg-white rounded-lg shadow-md">
+                <p class="text-gray-700">{{ post.content }}</p>
+                <p class="text-sm text-gray-500 mt-2">Posted by {{ post.author }} on {{ post.createdAt|date('Y-m-d H:i') }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="post" class="mt-6">
+        <textarea name="content" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Your message..." required></textarea>
+        <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">Post Reply</button>
+    </form>
+</div>
+{% endblock %}
