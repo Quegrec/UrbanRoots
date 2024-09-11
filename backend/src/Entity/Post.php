@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PostRepository;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -26,6 +27,15 @@ class Post
 
     #[ORM\ManyToOne(targetEntity: self::class)]
     private ?self $parent = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column]
+    private bool $isDeleted = false;
 
     public function getId(): ?string
     {
@@ -79,4 +89,41 @@ class Post
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function IsDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setDeleted(bool $isDeleted): static
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+    
 }

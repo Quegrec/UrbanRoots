@@ -4,8 +4,8 @@ namespace Domain\UseCase\Forum\Topic;
 
 use Domain\Entity\Topic;
 use Domain\Definition\ErrorStatus;
-use Domain\Request\Topic\CreateTopicRequest;
-use Domain\Response\Topic\CreateTopicResponse;
+use Domain\Request\Forum\Topic\CreateTopicRequest;
+use Domain\Response\Forum\Topic\CreateTopicResponse;
 use Domain\Port\Repository\UserRepositoryInterface;
 use Domain\Port\Repository\TopicRepositoryInterface;
 

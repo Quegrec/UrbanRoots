@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Request\Topic;
+namespace Domain\Request\Forum\Topic;
 
 class CreateTopicRequest
 {

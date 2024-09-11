@@ -13,7 +13,7 @@ use Doctrine\Persistence\ObjectManager;
 use Domain\Validator\Entity\UserValidator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Domain\UseCase\Forum\Topic\CreateTopic;
-use Domain\Request\Topic\CreateTopicRequest;
+use Domain\Request\Forum\Topic\CreateTopicRequest;
 use Domain\Request\User\RegisterUserRequest;
 
 class AppFixtures extends Fixture

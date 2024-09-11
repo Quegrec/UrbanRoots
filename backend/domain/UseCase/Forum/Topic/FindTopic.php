@@ -2,8 +2,8 @@
 
 namespace Domain\UseCase\Forum\Topic;
 
-use Domain\Request\Topic\FindTopicRequest;
-use Domain\Response\Topic\FindTopicResponse;
+use Domain\Request\Forum\Topic\FindTopicRequest;
+use Domain\Response\Forum\Topic\FindTopicResponse;
 use Domain\Port\Repository\TopicRepositoryInterface;
 
 class FindTopic
@@ -16,15 +16,15 @@ class FindTopic
     public function execute(FindTopicRequest $request): FindTopicResponse
     {
         if (!is_null($request->getTitle())) {
-            $topics = $this->topicRepository->findByTitle($request->getTitle());
+            $topic = $this->topicRepository->findByTitle($request->getTitle());
         } else {
-            $topics = $this->topicRepository->findAll();
+            $topic = $this->topicRepository->findAll();
         }
         
         return new FindTopicResponse(
             success: true,
             errors: [],
-            topics: $topics,
+            topic: $topic,
         );
     }
 }

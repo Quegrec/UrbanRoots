@@ -37,11 +37,11 @@ class PostMapper implements DataMapperInterface
         $infraEntity = (new \Domain\Entity\Post(
             content: $entity->getContent(),
             postId: $entity->getId(),
-            authorId: $entity->getAuthor()->getId(),
-            parentId: $entity->getParent() ? $entity->getParent()->getId() : null
+            authorId: $entity->getAuthor()->getId()
         ))->setId($entity->getId())
             ->setCreatedAt($entity->getCreatedAt())
-            ->setUpdatedAt($entity->getUpdatedAt());
+            ->setUpdatedAt($entity->getUpdatedAt())
+            ->setParentId($entity->getParent() ? $entity->getParent()->getId() : null);
 
         return $infraEntity;
     }

@@ -1,16 +1,16 @@
 <?php
 
-namespace Domain\Response\Topic;
+namespace Domain\Response\Forum\Post;
 
-use Domain\Entity\Topic;
-use Domain\Response\DomainResponseInterface;
+use App\Entity\Post;
 
-class CreateTopicResponse implements DomainResponseInterface
+class FindPostResponse
 {
     public function __construct(
         private bool $success,
         private array $errors = [],
-        private ?Topic $topic = null
+        private array $posts = [],
+        private ?Post $post = null
     ) {
     }
 
@@ -24,8 +24,13 @@ class CreateTopicResponse implements DomainResponseInterface
         return $this->errors;
     }
 
-    public function getTopic(): ?Topic
+    public function getPosts(): ?array
     {
-        return $this->topic;
+        return $this->posts;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
     }
 }

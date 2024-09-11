@@ -6,13 +6,16 @@ use App\Entity\Post;
 use App\Entity\Topic;
 use App\Form\PostType;
 use App\Form\TopicType;
+use App\Repository\PostRepository;
 use App\Repository\TopicRepository;
+use Domain\Request\Forum\Post\FindPostRequest;
+use Domain\UseCase\Forum\Post\FindPost;
 use Doctrine\ORM\EntityManagerInterface;
 use Domain\UseCase\Forum\Topic\FindTopic;
-use Domain\Request\Topic\FindTopicRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Domain\Request\Forum\Topic\FindTopicRequest;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -24,13 +27,45 @@ class ForumController extends AbstractController
         $findTopics = new FindTopic($topicRepository);
         $findTopicRequest = new FindTopicRequest();
 
-        $topics = $findTopics->execute($findTopicRequest)->getTopics();
+        $topics = $findTopics->execute($findTopicRequest)->getTopic();
 
         return $this->render("forum/topic_list.html.twig", [
             "topics"=> $topics
         ]);
     }
 
+    #[Route(path:"/forum/topic/{title}", name:"forum_topic", methods: ["GET", "POST"])]
+    public function details(string $title, TopicRepository $topicRepository, PostRepository $postRepository): Response
+    {
+        $findTopic = new FindTopic($topicRepository);
+        $findTopicRequest = new FindTopicRequest($title);
+
+        $topic = $findTopic->execute($findTopicRequest)->getTopic();
+
+        $findPosts = new FindPost($postRepository);
+        $findPostsRequest = new FindPostRequest(topicId: $topic->getId());
+        $posts = $findPosts->execute($findPostsRequest)->getPosts();
+        
+        return $this->render("forum/topic.html.twig", [
+            "topic"=> $topic,
+            "posts"=> $posts
+        ]);
+        
+        // if ($request->isMethod('POST')) {
+
+        //     $createPost = new CreatePost($postRepository, $topicRepository)
+        //     $post = new Post();
+        //     $post->setContent($request->request->get('content'));
+        //     $post->setTopic($topic);
+        //     $post->setAuthor($this->getUser());
+        //     $post->setCreatedAt(new \DateTime());
+
+        //     $em->persist($post);
+        //     $em->flush();
+
+        //     return $this->redirectToRoute('forum_topic', ['title' => $title]);
+        // }
+    }
     // /**
     //  * @Route("/forum/topic/{id}", name="forum_topic")
     //  */

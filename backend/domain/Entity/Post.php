@@ -8,12 +8,13 @@ class Post
     private \DateTimeInterface $createdAt;
     private ?\DateTimeInterface $updatedAt;
     private bool $isDeleted = false; // Soft delete (I don't know how i should handle this)
+    private ?string $parentId = null; // In case of responding to an existing post
+
 
     public function __construct(
         private string $content,
         private string $postId,
         private string $authorId,
-        private string $parentId = null // In case of responding to an existing post
     ) {
         if (empty($this->id)) {
             $this->id = uniqid();

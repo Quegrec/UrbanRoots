@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Response\Topic;
+namespace Domain\Response\Forum\Topic;
 
 use Domain\Entity\Topic;
 use Domain\Response\DomainResponseInterface;
@@ -10,7 +10,7 @@ class FindTopicResponse implements DomainResponseInterface
     public function __construct(
         private bool $success,
         private array $errors = [],
-        private array $topics = []
+        private ?Topic $topic = null
     ) {
     }
 
@@ -24,8 +24,8 @@ class FindTopicResponse implements DomainResponseInterface
         return $this->errors;
     }
 
-    public function getTopics(): array
+    public function getTopic(): ?Topic
     {
-        return $this->topics;
+        return $this->topic;
     }
 }

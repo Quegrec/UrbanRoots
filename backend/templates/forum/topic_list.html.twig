@@ -8,8 +8,7 @@
     <ul class="space-y-4">
         {% for topic in topics %}
             <li class="p-4 bg-gray-100 rounded-lg shadow">
-                <a href="" class="text-lg font-semibold text-blue-600">{{ topic.title }}</a> 
-                {# href="{{ path('forum_topic', { 'id': topic.id }) }}" #}
+                <a href="{{ path('forum_topic', { 'title': topic.title }) }}" class="text-lg font-semibold text-blue-600">{{ topic.title }}</a>
                 <p class="text-sm text-gray-600">{{ topic.description }}</p>
             </li>
         {% endfor %}

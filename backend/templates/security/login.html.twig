@@ -3,7 +3,7 @@
 {% block body %}
     <div class="flex justify-center items-center h-screen">
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <h2 class="text-2xl font-bold mb-6">Login</h2>
+            <h1 class="text-2xl font-bold mb-6">Connection</h1>
             <form action="{{ path('app_login') }}" method="post">
                 <input type="text" name="_username" class="mb-4 w-full p-2 border border-gray-300 rounded" required>
                 <input type="password" name="_password" class="mb-4 w-full p-2 border border-gray-300 rounded" required>
@@ -12,7 +12,11 @@
                 </button>
             </form>
             <div class="text-center mt-4">
-                <a href="{{ path('app_register') }}" class="text-blue-500 hover:text-blue-700">S'enregistrer</a>
+                <a href="" class="text-blue-500 hover:text-blue-700">Mot de passe oublié ?</a>
+                <div>
+                    <p>Si vous n'êtes pas encore inscrit, <a href="{{ path('app_register') }}" class="text-blue-500 hover:text-blue-700 underline">cliquez ici</a></p>
+                    
+                </div>
             </div>
         </div>
     </div>
